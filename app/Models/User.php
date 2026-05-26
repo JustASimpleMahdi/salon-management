@@ -3,7 +3,6 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Database\Factories\UserFactory;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -20,7 +19,6 @@ use Illuminate\Notifications\Notifiable;
 'username',
 'password',
 'national_code',
-'salary',
 'phone',
 ])]
 #[Hidden(['password', 'remember_token'])]

@@ -2,10 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Role;
 use App\Models\User;
 use App\RoleEnum;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ManagerSeeder extends Seeder
@@ -15,20 +13,14 @@ class ManagerSeeder extends Seeder
      */
     public function run(): void
     {
-        $managerRole = Role::create([
-            'key' => RoleEnum::MANAGER,
-            'name' => 'مدیر',
-        ]);
-
         User::create([
-            'firstname' => 'مبینا',
-            'lastname' => 'براهویی',
+            'firstname' => 'یاسمن',
+            'lastname' => 'شاکری',
             'national_code' => '1234567890',
-            'username' => 'mobina',
+            'username' => 'yasaman',
             'password' => '12345678',
-            'salary' => 20_000_000,
-            'phone' => '09036249486',
-            'role_id' => $managerRole->id,
+            'phone' => '09353397248',
+            'is_manager' => true,
         ]);
     }
 }
