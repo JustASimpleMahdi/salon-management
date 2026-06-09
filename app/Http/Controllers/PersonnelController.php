@@ -82,6 +82,7 @@ class PersonnelController extends Controller
      */
     public function destroy(Personnel $personnel)
     {
-        //
+        $personnel->delete();
+        return redirect()->route('manager.personnels.index');
     }
 }
