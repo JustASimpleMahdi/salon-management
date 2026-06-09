@@ -9,7 +9,7 @@
         </div>
         <input
             name="date"
-            value="{{ jdate()->format('Y/m/d') }}"
+            value="{{ old('date',jdate()->format('Y/m/d')) }}"
             class="w-30 left-[140px] top-[142px] absolute text-center justify-start text-[#6d5246] text-[19px] font-bold">
         <div data-svg-wrapper class="left-[39px] top-[136px] absolute">
             <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">

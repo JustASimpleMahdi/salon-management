@@ -85,20 +85,6 @@
         <div class="left-[24px] top-[239px] absolute flex flex-col gap-4">
             @foreach($appointments as $appointment)
                 <div class="w-[345px] relative overflow-hidden bg-white rounded-3xl p-4">
-                    <div>
-                        <div data-svg-wrapper class="left-[18px] top-[18px] absolute">
-                            <svg width="72" height="28" viewBox="0 0 72 28" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M58 0H14C6.26801 0 0 6.26801 0 14C0 21.732 6.26801 28 14 28H58C65.732 28 72 21.732 72 14C72 6.26801 65.732 0 58 0Z"
-                                    fill="#F3ECE7"/>
-                            </svg>
-                        </div>
-                        <div
-                            class="left-[40.50px] top-[25px] absolute text-center justify-start text-[#6d5246] text-xs font-normal">
-                            فعال
-                        </div>
-                    </div>
                     <div
                         class="left-[252px] top-[24px]  text-right justify-start text-[#2d211d] text-lg font-bold">{!! $appointment->personnels->pluck('fullname')->implode('<br>') !!}</div>
                     <div
@@ -114,35 +100,40 @@
                         class="right-[20px] top-[94px] mt-2 text-right justify-start text-[#b19a90] text-xs font-normal">
                         {{ $appointment->personnels->map(fn(Personnel $personnel)=> $personnel->services->pluck('name'))->flatten()->unique()->implode(' • ') }}
                     </div>
-                    <div class="left-[34px] bottom-[32px] absolute cursor-pointer" onclick="openBottomDrawer({
+                    @if($appointment->end->isFuture())
+                        <div class="left-[34px] bottom-[32px] absolute cursor-pointer" onclick="openBottomDrawer({
                             id: {{ $appointment->id }},
                             name: 'ساعت {{ $appointment->start->format('H:i') }} - {{ $appointment->end->format('H:i') }}',
                             editLink : '{{ route('manager.appointments.edit',compact('appointment')) }}',
                             deleteLink : '{{ route('manager.appointments.destroy',compact('appointment')) }}',
                         })">
 
-                        <div data-svg-wrapper class="left-0 -top-[0.5px] absolute">
-                            <svg width="23" height="23" viewBox="0 0 23 23" fill="none"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="11.5" cy="11.5" r="11.5" fill="#F4EEEA"/>
-                            </svg>
+                            <div data-svg-wrapper class="left-0 -top-[0.5px] absolute">
+                                <svg width="23" height="23" viewBox="0 0 23 23" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="11.5" cy="11.5" r="11.5" fill="#F4EEEA"/>
+                                </svg>
+                            </div>
+                            <div data-svg-wrapper class="left-[10px] top-1 absolute">
+                                <svg width="3" height="3" viewBox="0 0 3 3" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="1.27778" cy="1.27778" r="1.27778" fill="#6D5246"/>
+                                </svg>
+                            </div>
+                            <div data-svg-wrapper class="left-[10px] top-2 absolute">
+                                <svg width="3" height="3" viewBox="0 0 3 3" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="1.27778" cy="1.27778" r="1.27778" fill="#6D5246"/>
+                                </svg>
+                            </div>
+                            <div data-svg-wrapper class="left-[10px] top-3 absolute">
+                                <svg width="3" height="3" viewBox="0 0 3 3" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="1.27778" cy="1.27778" r="1.27778" fill="#6D5246"/>
+                                </svg>
+                            </div>
                         </div>
-                        <div data-svg-wrapper class="left-[10px] top-1 absolute">
-                            <svg width="3" height="3" viewBox="0 0 3 3" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="1.27778" cy="1.27778" r="1.27778" fill="#6D5246"/>
-                            </svg>
-                        </div>
-                        <div data-svg-wrapper class="left-[10px] top-2 absolute">
-                            <svg width="3" height="3" viewBox="0 0 3 3" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="1.27778" cy="1.27778" r="1.27778" fill="#6D5246"/>
-                            </svg>
-                        </div>
-                        <div data-svg-wrapper class="left-[10px] top-3 absolute">
-                            <svg width="3" height="3" viewBox="0 0 3 3" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="1.27778" cy="1.27778" r="1.27778" fill="#6D5246"/>
-                            </svg>
-                        </div>
-                    </div>
+                    @endif
                 </div>
 
             @endforeach
