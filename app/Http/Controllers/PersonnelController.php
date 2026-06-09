@@ -30,7 +30,7 @@ class PersonnelController extends Controller
             'services.*' => 'required|integer|exists:services,id'
         ]);
 
-        $personnel = Personnel::create($validated);
+        $personnel = Personnel::create($request->only('firstname', 'lastname'));
         if (!empty($request->services)) {
             $personnel->services()->sync($request->services);
         }
@@ -48,19 +48,13 @@ class PersonnelController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Personnel $personnel)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Personnel $personnel)
     {
-        //
+        $services = Service::latest()->get();
+        $personnel->load('services');
+        return view('manager.personnel.edit', compact('personnel', 'services'));
     }
 
     /**
@@ -68,7 +62,19 @@ class PersonnelController extends Controller
      */
     public function update(Request $request, Personnel $personnel)
     {
-        //
+        $request->validate([
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'services' => 'sometimes|array',
+            'services.*' => 'required|integer|exists:services,id'
+        ]);
+        $personnel->update($request->only('firstname', 'lastname'));
+        if (!empty($request->services)) {
+            $personnel->services()->sync($request->services);
+        } else {
+            $personnel->services()->detach();
+        }
+        return redirect()->route('manager.personnels.index');
     }
 
     /**

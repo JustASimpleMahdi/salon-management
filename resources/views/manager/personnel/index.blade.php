@@ -55,13 +55,15 @@
             @foreach($personnels as $personnel)
                 <div class="w-[345px] h-[92px] relative overflow-hidden">
                     <div class="w-[345px] h-[92px] absolute left-0 top-0 absolute bg-white rounded-[28px]"></div>
-                    <div
-                        class="left-[250px] top-[19px] absolute text-right justify-start text-[#2d211d] text-lg font-bold">
-                        {{ $personnel->fullname }}
-                    </div>
-                    <div
-                        class="left-[250px] top-[50px] absolute text-right justify-start text-[#8d7366] text-[13px] font-normal">
-                        {{ $personnel->services->implode(' • ') }}
+                    <div class="left-[250px] top-[19px] absolute">
+                        <div
+                            class="mb-2  text-right justify-start text-[#2d211d] text-lg font-bold">
+                            {{ $personnel->fullname }}
+                        </div>
+                        <div
+                            class="text-right justify-start text-[#8d7366] text-[13px] font-normal">
+                            {{ $personnel->services->pluck('name')->implode(' • ') }}
+                        </div>
                     </div>
                     <button type="button" onclick="openBottomDrawer({
                     name: '{{ $personnel->fullname }}',
