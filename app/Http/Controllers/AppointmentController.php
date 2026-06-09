@@ -71,7 +71,7 @@ class AppointmentController extends Controller
         ]);
         $appointment->personnels()->sync($validated['personnels']);
 
-        return redirect()->route('manager.appointments.index');
+        return redirect()->route('manager.appointments.index', ['date' => $validated['date']]);
     }
 
     /**
@@ -134,7 +134,7 @@ class AppointmentController extends Controller
             'end' => $endDate,
         ]);
         $appointment->personnels()->sync($validated['personnels']);
-        return redirect()->route('manager.appointments.index');
+        return redirect()->route('manager.appointments.index', ['date' => $validated['date']]);
     }
 
     /**
