@@ -23,7 +23,7 @@ class AppointmentController extends Controller
             $date = Jalalian::now();
         }
         $appointments = $query->whereDate('start', $date->toCarbon())->get();
-        return view('manager.appointments.index', compact('appointments'));
+        return view('manager.appointments.index', compact('appointments', 'date'));
     }
 
     /**
