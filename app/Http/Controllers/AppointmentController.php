@@ -64,6 +64,7 @@ class AppointmentController extends Controller
                 'time' => 'زمان با نوبتی دیگر تداخل دارد.',
             ])->withInput();
         }
+
         $appointment = Appointment::create([
             'start' => $startDate,
             'end' => $endDate,
@@ -82,20 +83,17 @@ class AppointmentController extends Controller
         return view('manager.appointments.create', compact('personnels'));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Appointment $appointment)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Appointment $appointment)
     {
-        //
+        if ($appointment->end->isPast()) abort(403);
+
+        $personnels = Personnel::latest()->get();
+        $appointment->load('personnels');
+        return view('manager.appointments.edit', compact('appointment', 'personnels'));
     }
 
     /**
@@ -103,7 +101,40 @@ class AppointmentController extends Controller
      */
     public function update(Request $request, Appointment $appointment)
     {
-        //
+        if ($appointment->end->isPast()) abort(403);
+
+        $validated = $request->validate([
+
+            'start' => ['required', new TimeRule],
+            'end' => ['required', new TimeRule],
+            'personnels' => ['required', 'array'],
+            'personnels.*' => ['required', 'exists:personnels,id'],
+        ]);
+        if ($validated['start'] >= $validated['end']) {
+            return back()->withErrors([
+                'end' => 'زمان پایان باید بزرگتر از زمان شروع باشد.',
+            ])->withInput();
+        }
+        $date = $appointment->start->format('Y/m/d');
+        $startDate = Jalalian::fromFormat('Y/m/d H:i', $date . ' ' . $validated['start']);
+        $endDate = Jalalian::fromFormat('Y/m/d H:i', $date . ' ' . $validated['end']);
+
+        if (
+            Appointment::whereNot('id', $appointment->id)->where('start', '<', $endDate->toCarbon())
+                ->where('end', '>', $startDate->toCarbon())
+                ->exists()
+        ) {
+            return back()->withErrors([
+                'time' => 'زمان با نوبتی دیگر تداخل دارد.',
+            ])->withInput();
+        }
+
+        $appointment->update([
+            'start' => $startDate,
+            'end' => $endDate,
+        ]);
+        $appointment->personnels()->sync($validated['personnels']);
+        return redirect()->route('manager.appointments.index');
     }
 
     /**
@@ -111,6 +142,7 @@ class AppointmentController extends Controller
      */
     public function destroy(Appointment $appointment)
     {
-        //
+        if ($appointment->end->isPast()) abort(403);
+
     }
 }

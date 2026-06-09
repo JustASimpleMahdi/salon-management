@@ -109,7 +109,12 @@
                         class="right-[20px] top-[94px] mt-2 text-right justify-start text-[#b19a90] text-xs font-normal">
                         {{ $appointment->personnels->map(fn(Personnel $personnel)=> $personnel->services->pluck('name'))->flatten()->unique()->implode(' • ') }}
                     </div>
-                    <div class="left-[34px] bottom-[32px] absolute cursor-pointer">
+                    <div class="left-[34px] bottom-[32px] absolute cursor-pointer" onclick="openBottomDrawer({
+                            id: {{ $appointment->id }},
+                            name: 'ساعت {{ $appointment->start->format('H:i') }} - {{ $appointment->end->format('H:i') }}',
+                            editLink : '{{ route('manager.appointments.edit',compact('appointment')) }}',
+                            deleteLink : '{{ route('manager.appointments.destroy',compact('appointment')) }}',
+                        })">
 
                         <div data-svg-wrapper class="left-0 -top-[0.5px] absolute">
                             <svg width="23" height="23" viewBox="0 0 23 23" fill="none"
@@ -139,5 +144,6 @@
         </div>
 
         @include('layout.base.footer')
+        <x-bottom-drawer name="نوبت"/>
     </div>
 @endsection

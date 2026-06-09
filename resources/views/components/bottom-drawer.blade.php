@@ -11,7 +11,7 @@
         <div class="w-[65px] h-[5.34px] left-[164px] top-[-0.05px] absolute bg-[#e7ded8] rounded-[3px]"></div>
         <div
             data-title-el
-            class="w-[54px] h-[23.50px] left-[168.50px] top-[29.86px] absolute text-center justify-start text-[#2d211d] text-lg font-bold">
+            class="-translate-x-1/2 h-[23.50px] left-1/2 top-[29.86px] absolute text-center justify-start text-[#2d211d] text-lg font-bold">
 
         </div>
         <a href="#"

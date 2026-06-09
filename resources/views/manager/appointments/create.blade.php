@@ -82,7 +82,6 @@
                 ثبت نوبت
             </div>
         </button>
-        <div>{{ $errors }}</div>
         <div
             class="left-[299px] top-[325px] absolute text-right justify-start text-[#2d211d] text-[28px] font-bold">
             پرسنل
