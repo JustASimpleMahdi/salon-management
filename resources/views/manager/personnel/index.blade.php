@@ -55,7 +55,7 @@
             @foreach($personnels as $personnel)
                 <div class="w-[345px] h-[92px] relative overflow-hidden">
                     <div class="w-[345px] h-[92px] absolute left-0 top-0 absolute bg-white rounded-[28px]"></div>
-                    <div class="left-[250px] top-[19px] absolute">
+                    <div class="right-[20px] top-[19px] absolute">
                         <div
                             class="mb-2  text-right justify-start text-[#2d211d] text-lg font-bold">
                             {{ $personnel->fullname }}

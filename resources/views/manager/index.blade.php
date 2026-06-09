@@ -82,7 +82,7 @@
                 <span class="mt-2 text-sm font-bold">پرسنل</span>
             </a>
             <!-- نوبت -->
-            <div
+            <a href="{{ route('manager.appointments.index') }}"
                 class="flex flex-col items-center justify-center bg-white rounded-[28px] h-[120px] col-span-2 self-center"
             >
                 <div
@@ -95,7 +95,7 @@
                     </svg>
                 </div>
                 <span class="mt-2 text-sm font-bold">نوبت</span>
-            </div>
+            </a>
         </div>
 
         <!-- Bottom Navigation -->

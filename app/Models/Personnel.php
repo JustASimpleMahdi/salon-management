@@ -10,6 +10,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 #[Fillable(['firstname', 'lastname'])]
 class Personnel extends Model
 {
+    public function appointments(): BelongsToMany
+    {
+        return $this->belongsToMany(Appointment::class);
+    }
     public function services(): BelongsToMany
     {
         return $this->belongsToMany(Service::class);
