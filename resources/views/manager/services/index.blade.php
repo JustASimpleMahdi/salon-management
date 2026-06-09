@@ -22,7 +22,8 @@
                         onclick="openBottomDrawer({
                             id: {{ $service->id }},
                             name: '{{ $service->name }}',
-                            editLink : '{{ route('manager.services.edit',compact('service')) }}'
+                            editLink : '{{ route('manager.services.edit',compact('service')) }}',
+                            deleteLink : '{{ route('manager.services.destroy',compact('service')) }}',
                         })"
                         class="cursor-pointer absolute left-[18px] top-[22px] w-[48px] h-[48px] bg-[#f5f1ee] rounded-full flex items-center justify-center">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="#8d7366">
@@ -75,11 +76,11 @@
                    class="w-[109px] h-[19.23px] left-[235px] top-[121px] absolute text-center justify-start text-[#6d5246] text-[15px] font-bold">
                     ویرایش خدمت
                 </a>
-                <a href="#"
-                   data-delete-el
-                   class="w-[81px] h-[19.23px] left-[260px] top-[176px] absolute text-center justify-start text-[#d67272] text-[15px] font-bold">
+                <button
+                    data-delete-el
+                    class="w-[81px] h-[19.23px] left-[260px] top-[176px] absolute text-center justify-start text-[#d67272] text-[15px] font-bold">
                     حذف خدمت
-                </a>
+                </button>
                 <div data-svg-wrapper class="left-[343px] top-[172px] absolute">
                     <svg width="17" height="21" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -105,6 +106,45 @@
             </div>
 
         </div>
+        <div id="delete-confirm-modal" class="hidden w-[393px] h-[852px] left-0 top-0 absolute overflow-hidden">
+            <div data-background-el class="w-[393px] h-[852px] left-0 top-0 absolute bg-black/30"></div>
+            <div class="w-[345px] h-60 left-[24px] top-[280px] absolute bg-[#fffcfa] rounded-[34px]"></div>
+            <div class="left-[150px] top-[317px] absolute text-center justify-start text-[#2d211d] text-2xl font-bold">
+                حذف خدمت
+            </div>
+            <div class="left-[110px] top-[371px] absolute text-center justify-start text-[#8d7366] text-sm font-normal">
+                آیا از حذف این خدمت اطمینان دارید؟
+            </div>
+            <div data-name-el
+                 class="left-[172px] top-[405px] absolute text-center justify-start text-[#6d5246] text-base font-bold">
+                رنگ مو
+            </div>
+            <form action="#" method="post" class="w-[305px] h-[52px] left-[44px] top-[450px] absolute overflow-hidden">
+                @csrf
+                @method('DELETE')
+                <div class="w-[305px] h-[52px] left-0 top-0 absolute overflow-hidden">
+                    <div class="w-[130px] h-[52px] left-0 top-0 absolute bg-[#f3ece7] rounded-[18px]"></div>
+                    <button
+                        type="button"
+                        data-cancel-el
+                        class="left-[44px] top-[18px] absolute text-center justify-start text-[#6d5246] text-sm font-normal">
+                        انصراف
+                    </button>
+                    <div class="w-[130px] h-[52px] left-[175px] top-0 absolute bg-[#d67272] rounded-[18px]">
+                        <button
+                            class="cursor-pointer left-1/2 top-1/2 -translate-1/2 absolute text-center justify-start text-white text-sm font-normal flex items-center gap-2">
+                            حذف
+                            <svg width="17" height="21" viewBox="0 0 17 21" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M8.32812 0C8.93277 0.000271019 9.42383 0.553239 9.42383 1.23535V1.48242H15.5596C16.1643 1.48242 16.6551 2.03473 16.6553 2.7168C16.6553 3.39908 16.1644 3.95215 15.5596 3.95215H15.3408V17.0449C15.3407 19.0911 13.8681 20.75 12.0527 20.75H4.60254C2.78675 20.75 1.31459 19.0911 1.31445 17.0449V4.94043C2.5246 4.94043 3.50684 6.04707 3.50684 7.41113V17.0449C3.50697 17.7271 3.99733 18.2793 4.60254 18.2793H12.0527C12.6575 18.2793 13.1493 17.7271 13.1494 17.0449V3.95215H1.0957C0.490433 3.95212 0 3.39906 0 2.7168C0.000222902 2.03475 0.49057 1.48245 1.0957 1.48242H7.23145V1.23535C7.23145 0.553072 7.72284 0 8.32812 0ZM6.35547 5.43457C6.96026 5.43465 7.45117 5.98769 7.45117 6.66992V15.5625C7.45117 16.2447 6.96026 16.7978 6.35547 16.7979C5.75018 16.7979 5.25977 16.2448 5.25977 15.5625V6.66992C5.25977 5.98764 5.75018 5.43457 6.35547 5.43457ZM10.2998 5.43457C10.9047 5.43457 11.3955 5.98764 11.3955 6.66992V15.5625C11.3955 16.2448 10.9047 16.7979 10.2998 16.7979C9.69462 16.7977 9.2041 16.2447 9.2041 15.5625V6.66992C9.2041 5.98773 9.69462 5.43471 10.2998 5.43457Z"
+                                    fill="#960019"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 @endsection
 
@@ -116,15 +156,47 @@
         const bottomDrawerEditEl = document.querySelector('#bottom-drawer [data-edit-el]')
         const bottomDrawerDeleteEl = document.querySelector('#bottom-drawer [data-delete-el]')
 
-        function openBottomDrawer({id, name, editLink}) {
-            console.log(editLink)
+        function openBottomDrawer({id, name, editLink, deleteLink}) {
+            function bottomDrawerDeleteOnClick() {
+                openDeleteModal({name, deleteLink})
+            }
+
             bottomDrawerEl.classList.remove('hidden');
             bottomDrawerTitleEl.innerText = name ?? ''
             bottomDrawerEditEl.href = editLink ?? '#'
+            bottomDrawerDeleteEl?.addEventListener('click', bottomDrawerDeleteOnClick)
+
+            function closeBottomDrawer() {
+                bottomDrawerEl.classList.add('hidden');
+                bottomDrawerDeleteEl?.removeEventListener('click', bottomDrawerDeleteOnClick)
+                bottomDrawerBackgroundEl.removeEventListener('click', closeBottomDrawer)
+            }
+
+
+            bottomDrawerBackgroundEl.addEventListener('click', closeBottomDrawer)
         }
 
-        bottomDrawerBackgroundEl.addEventListener('click', () => {
-            bottomDrawerEl.classList.add('hidden');
-        })
+    </script>
+    <script>
+        const deleteConfirmModalEl = document.querySelector('#delete-confirm-modal')
+        const deleteConfirmModalBackgroundEl = document.querySelector('#delete-confirm-modal [data-background-el]')
+        const deleteConfirmModalFormEl = document.querySelector('#delete-confirm-modal form')
+        const deleteConfirmModalNameEl = document.querySelector('#delete-confirm-modal [data-name-el]')
+        const deleteConfirmModalCancelEl = document.querySelector('#delete-confirm-modal [data-cancel-el]')
+
+        function openDeleteModal({deleteLink, name}) {
+            deleteConfirmModalEl.classList.remove('hidden');
+            deleteConfirmModalFormEl.action = deleteLink
+            deleteConfirmModalNameEl.innerText = name
+
+            function close() {
+                deleteConfirmModalEl.classList.add('hidden');
+                deleteConfirmModalBackgroundEl.removeEventListener('click', close)
+                deleteConfirmModalCancelEl.addEventListener('click', close)
+            }
+
+            deleteConfirmModalBackgroundEl.addEventListener('click', close)
+            deleteConfirmModalCancelEl.addEventListener('click', close)
+        }
     </script>
 @endpush
