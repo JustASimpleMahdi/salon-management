@@ -37,20 +37,13 @@ class ServiceController extends Controller
         return view('manager.services.create');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Service $service)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(Service $service)
     {
-        //
+        return view('manager.services.edit', compact('service'));
     }
 
     /**
@@ -58,7 +51,12 @@ class ServiceController extends Controller
      */
     public function update(Request $request, Service $service)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required',
+            'description' => 'nullable',
+        ]);
+        $service->update($validated);
+        return redirect()->route('manager.services.index');
     }
 
     /**

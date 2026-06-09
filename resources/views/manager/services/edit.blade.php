@@ -1,8 +1,9 @@
 @extends('layout.base.index')
 @section('main')
-    <form action="{{ route('manager.services.store') }}" method="post"
+    <form action="{{ route('manager.services.update',compact('service')) }}" method="post"
           class="w-[393px] h-[852px] relative bg-white overflow-hidden">
         @csrf
+        @method('PUT')
         <div class="w-[393px] h-[852px] left-0 top-0 absolute bg-[#f8f4f1]"></div>
 
         <div data-svg-wrapper class="left-[24px] top-[130px] absolute">
@@ -18,16 +19,16 @@
 
             <div
                 class="left-1/2 top-1/2 -translate-1/2 absolute text-center justify-start text-white text-[15px] font-bold">
-                ثبت خدمت
+                ذخیره تغییرات
             </div>
         </button>
 
         <div
-            class="left-[250px] top-[43px] absolute text-right justify-start text-[#2d211d] text-[28px] font-bold">
-            ایجاد خدمت
+            class="left-[230px] top-[43px] absolute text-right justify-start text-[#2d211d] text-[28px] font-bold">
+            ویرایش خدمت
         </div>
         <div
-            class="left-[265px] top-[83px] absolute text-right justify-start text-[#8d7366] text-[13px] font-normal">
+            class="left-[280px] top-[83px] absolute text-right justify-start text-[#8d7366] text-[13px] font-normal">
             افزودن خدمت جدید
         </div>
 
@@ -47,12 +48,10 @@
         </div>
         <input
             name="name"
-            value="{{ old('name') }}"
+            value="{{ old('name',$service->name) }}"
             class="w-[297px] h-[44px] left-[48px] top-[195px] absolute bg-white rounded-[16px] border border-[#e7ded8] px-4 text-right text-[#2d211d] placeholder:text-[#b19a90] focus:outline-none focus:border-[#6d5246]"
+            placeholder="رنگ مو"
         />
-        @error('name')
-        <p class="mt-2 text-right text-[#D65A5A] text-xs">{{ $message }}</p>
-        @enderror
 
         <!-- توضیحات -->
         <div
@@ -62,9 +61,8 @@
         <textarea
             name="description"
             class="w-[297px] h-[64px] left-[48px] top-[310px] absolute bg-white rounded-[16px] border border-[#e7ded8] px-4 pt-3 text-right text-[#2d211d] placeholder:text-[#b19a90] resize-none focus:outline-none focus:border-[#6d5246]"
-        >{{ old('description') }}</textarea>
-        @error('description')
-        <p class="mt-2 text-right text-[#D65A5A] text-xs">{{ $message }}</p>
-        @enderror
+            placeholder="توضیح کوتاه درباره خدمت"
+        >{{ old('name',$service->description) }}</textarea>
+
     </form>
 @endsection

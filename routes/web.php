@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 /* Authentication */
 Route::prefix('manager')->middleware(['auth', 'manager'])->group(function () {
-    Route::resource('services', ServiceController::class)->names('manager.services');
+    Route::resource('services', ServiceController::class)->except(['show'])->names('manager.services');
     Route::get('/', [ManagerController::class, 'index'])->name('manager.index');
 });
 
