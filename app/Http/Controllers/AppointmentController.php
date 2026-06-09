@@ -144,5 +144,7 @@ class AppointmentController extends Controller
     {
         if ($appointment->end->isPast()) abort(403);
 
+        $appointment->delete();
+        return redirect()->route('manager.appointments.index');
     }
 }
