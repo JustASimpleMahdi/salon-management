@@ -38,4 +38,10 @@ class User extends Model implements
             'password' => 'hashed',
         ];
     }
+
+    public function redirectRoute(): string
+    {
+        if ($this->is_manager) return route('manager.index');
+        return route('index');
+    }
 }

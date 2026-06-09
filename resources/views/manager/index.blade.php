@@ -15,7 +15,7 @@
 
         <!-- Card -->
         <div
-            class="absolute left-[24px] top-[120px] w-[345px] h-[190px] bg-gradient-to-br from-[#7b5b4c] via-[#5a4036] to-[#2f211c] rounded-[34px] p-5 relative overflow-hidden"
+            class="absolute left-[24px] top-[120px] w-[345px] h-[190px] bg-gradient-to-br from-[#7b5b4c] via-[#5a4036] to-[#2f211c] rounded-[34px] p-5 overflow-hidden"
         >
             <!-- محو شدن اشکال -->
             <div
@@ -67,7 +67,7 @@
                 <span class="mt-2 text-sm font-bold">خدمات</span>
             </a>
             <!-- پرسنل -->
-            <div
+            <a href="{{ route('manager.personnels.index') }}"
                 class="flex flex-col items-center justify-center bg-white rounded-[28px] h-[120px]"
             >
                 <div
@@ -80,7 +80,7 @@
                     </svg>
                 </div>
                 <span class="mt-2 text-sm font-bold">پرسنل</span>
-            </div>
+            </a>
             <!-- نوبت -->
             <div
                 class="flex flex-col items-center justify-center bg-white rounded-[28px] h-[120px] col-span-2 self-center"

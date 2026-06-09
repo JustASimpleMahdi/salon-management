@@ -24,10 +24,8 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        if (auth()->user()->is_manager) {
-            return redirect()->route('manager.index');
-        }
-        return redirect()->route('index');
+
+        return redirect()->intended(auth()->user()->redirectRoute());
     }
     public function logout()
     {

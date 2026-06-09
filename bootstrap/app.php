@@ -4,6 +4,7 @@ use App\Http\Middleware\EnsureManagerMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Request;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -15,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'manager' => EnsureManagerMiddleware::class,
         ]);
+        $middleware->redirectUsersTo(fn(Request $request) => $request->user()->redirectRoute());
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
