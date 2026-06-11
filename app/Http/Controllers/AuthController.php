@@ -2,11 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
+    public function signin()
+    {
+        return view('auth.signin');
+    }
+
+    public function signinSubmit(Request $request)
+    {
+        $validated = $request->validate([
+            'username' => 'required|unique:users,username',
+            'password' => 'required',
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'phone' => 'required|regex:/09\d{9}/',
+            'national_code' => 'required|digits:10',
+        ]);
+        $user = User::create($validated);
+
+        Auth::login($user, true);
+        $request->session()->regenerate();
+
+        return redirect()->route($user->redirectRoute());
+    }
     public function login()
     {
         return view('auth.login');

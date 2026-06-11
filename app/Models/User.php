@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
 
@@ -29,9 +28,6 @@ class User extends Model implements
     use HasFactory, Notifiable;
     use Authorizable, Authenticatable;
 
-    public function role(): BelongsTo{
-        return $this->belongsTo(Role::class);
-    }
     protected function casts(): array
     {
         return [

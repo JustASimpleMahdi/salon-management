@@ -9,7 +9,7 @@
         <!-- Logo -->
 
         <div class="w-[160px] h-[160px] absolute left-1/2 -translate-x-1/2 top-[40px]">
-            <div class="w-full h-full rounded-full bg-[#523D35]"></div>
+            <div class="w-full h-full rounded-full "></div>
 
             <div
                 class="w-[140px] h-[140px] absolute left-[10px] top-[10px] rounded-full border-2 border-[#C8A97E]"
@@ -94,16 +94,14 @@
             @enderror
 
             <div class="mt-4 text-center text-[#8A817C] text-[12px] cursor-pointer">
-                رمز عبور خود را فراموش کرده‌اید؟
+                رمز عبور خود را فراموش کرده‌اید؟ <a href="{{ route('signin') }}" class="font-bold underline">ثبت نام</a>
             </div>
         </div>
 
         <!-- Login Button -->
 
-        <button
-            class="absolute left-[24px] top-[610px] w-[345px] h-[58px] rounded-[22px] bg-gradient-to-br from-[#6D5246] to-[#2D211D] text-white text-[16px] font-bold"
-        >
+        <x-components.button class="absolute left-[24px] top-[610px]">
             ورود
-        </button>
+        </x-components.button>
     </form>
 @endsection

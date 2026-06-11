@@ -16,6 +16,8 @@ Route::prefix('manager')->middleware(['auth', 'manager'])->group(function () {
 });
 
 Route::middleware('guest')->group(function () {
+    Route::get('/signin', [AuthController::class, 'signin'])->name('signin');
+    Route::post('/signin', [AuthController::class, 'signinSubmit'])->name('signin-submit');
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login', [AuthController::class, 'loginSubmit'])->name('login-submit');
 });
