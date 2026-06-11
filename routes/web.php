@@ -5,9 +5,14 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\UserDashboardController;
 use Illuminate\Support\Facades\Route;
 
 /* Authentication */
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', [UserDashboardController::class, 'index'])->name('index');
+});
+
 Route::prefix('manager')->middleware(['auth', 'manager'])->group(function () {
     Route::resource('appointments', AppointmentController::class)->except(['show'])->names('manager.appointments');
     Route::resource('personnels', PersonnelController::class)->except(['show'])->names('manager.personnels');
@@ -23,5 +28,4 @@ Route::middleware('guest')->group(function () {
 });
 Route::delete('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 
-Route::get('/', fn() => view('loading'))->name('loading');
-Route::get('/index', fn() => view('index'))->name('index');
+//Route::get('/', fn() => view('loading'))->name('loading');
