@@ -75,19 +75,26 @@
             <div class="absolute left-0 top-[48px] w-full h-[82px] bg-[#FFFCFA] border-t border-[#E8DFD8]"></div>
 
             <!-- Protruding center button group -->
-            <!-- Outer circle -->
-            <div
-                class="absolute left-1/2 top-[18px] w-[84px] h-[84px] rounded-full bg-black/[0.07] -translate-x-1/2"></div>
-            <!-- Main circle -->
-            <div
-                class="absolute left-1/2 top-[24px] w-[72px] h-[72px] rounded-full bg-[#503930] -translate-x-1/2"></div>
-            <!-- Gold ring -->
-            <div
-                class="absolute left-1/2 top-[26px] w-[72px] h-[72px] rounded-full border border-[#D4AF7F]/45 -translate-x-1/2"></div>
-            <!-- Plus vertical -->
-            <div class="absolute left-1/2 top-[47px] w-[4px] h-[30px] bg-white rounded-full -translate-x-1/2"></div>
-            <!-- Plus horizontal -->
-            <div class="absolute left-1/2 top-[60px] w-[30px] h-[4px] bg-white rounded-full -translate-x-1/2"></div>
+            <a href="{{ route('reservation.services') }}"
+               class="absolute left-1/2 -translate-x-1/2  top-[18px] block w-[84px] h-[84px] focus:outline-none">
+
+                <!-- Outer circle -->
+                <div class="w-[84px] h-[84px] rounded-full bg-black/7"></div>
+
+                <!-- Main circle -->
+                <div
+                    class="absolute left-1/2 top-[6px] w-[72px] h-[72px] rounded-full bg-[#503930] -translate-x-1/2 transition-colors duration-200 group-hover:bg-[#6b4f45]"></div>
+
+                <!-- Gold ring -->
+                <div
+                    class="absolute left-1/2 top-[8px] w-[72px] h-[72px] rounded-full border border-[#D4AF7F]/45 -translate-x-1/2 pointer-events-none"></div>
+
+                <!-- Plus vertical -->
+                <div class="absolute left-1/2 top-[29px] w-[4px] h-[30px] bg-white rounded-full -translate-x-1/2"></div>
+
+                <!-- Plus horizontal -->
+                <div class="absolute left-1/2 top-[42px] w-[30px] h-[4px] bg-white rounded-full -translate-x-1/2"></div>
+            </a>
 
             <!-- Nav items row using flex for even distribution -->
             <div
@@ -107,13 +114,13 @@
                 </a>
 
                 <!-- Services -->
-                <div class="flex flex-col items-center gap-y-[6px] mt-[3px]">
+                <a href="{{ route('reservation.services') }}" class="flex flex-col items-center gap-y-[6px] mt-[3px]">
                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
                         <path d="M11 1L14 8L21 11L14 14L11 21L8 14L1 11L8 8L11 1Z" stroke="#8D7366" stroke-width="2"
                               stroke-linejoin="round"/>
                     </svg>
                     <span class="text-[#8D7366] text-[11px]">خدمات</span>
-                </div>
+                </a>
 
                 <!-- Center spacer for the protruding button -->
                 <div class="w-[50px]"></div>

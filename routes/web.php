@@ -4,12 +4,15 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\PersonnelController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\UserDashboardController;
 use Illuminate\Support\Facades\Route;
 
 /* Authentication */
 Route::middleware(['auth'])->group(function () {
+    Route::get('/services', [ReservationController::class, 'services'])->name('reservation.services');
+
     Route::get('/', [UserDashboardController::class, 'index'])->name('index');
 });
 
