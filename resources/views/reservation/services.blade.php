@@ -1,6 +1,7 @@
 @extends('layout.base.index')
 @section('main')
-    <div class="w-[393px] h-[852px] relative bg-[#f8f4f1] overflow-hidden flex flex-col">
+    <form action="{{ route('reservation.index') }}"
+          class="w-[393px] h-[852px] relative bg-[#f8f4f1] overflow-hidden flex flex-col">
         <!-- Back button (kept absolute as a floating element) -->
         <a href="{{ route('index') }}" class="absolute left-[24px] top-[49px]">
             <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -48,5 +49,5 @@ has-checked:bg-[#fff0eb] has-checked:border-[#503930]" onclick="this.querySelect
             class="cursor-pointer w-[345px] h-[60px] mx-auto bg-[#503930] rounded-3xl flex items-center justify-center mt-[66px]">
             <span class="text-white text-lg font-bold">ثبت و ادامه</span>
         </button>
-    </div>
+    </form>
 @endsection
