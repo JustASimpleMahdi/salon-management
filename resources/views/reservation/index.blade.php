@@ -21,7 +21,7 @@
 
         <!-- Page title -->
         <div class="flex w-full pt-[42px] pr-[40px]">
-            <h1 class="text-[28px] font-bold text-[#2d211d] text-right">رزرو نوبت</h1>
+            <h1 class="text-[28px] font-bold text-[#2d211d] text-right">رزرو نوبت {{ $service->name }}</h1>
         </div>
 
         <!-- Date label -->
@@ -32,21 +32,40 @@
         <!-- Date picker with arrows -->
         <div class="flex items-center justify-between gap-x-4 px-8 mt-[8px]">
             <!-- Right arrow (points left in RTL) -->
-            <a href="?{{ http_build_query(array_merge(request()->query(),['date' => $date->subDay()->format('Y/m/d')])) }}"
-               class="flex items-center justify-center w-[35px] h-[35px] rounded-full bg-white border border-[#707070]">
-                <svg width="13" height="24" viewBox="0 0 13 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g clip-path="url(#clip0_1_140)">
-                        <path
-                            d="M1.39753 24.0029C1.12021 24.0034 0.848996 23.9197 0.618319 23.7626C0.387641 23.6054 0.207905 23.3818 0.101929 23.1201C-0.00404683 22.8584 -0.0314835 22.5705 0.0231024 22.2929C0.0776883 22.0153 0.211835 21.7605 0.408512 21.5609L7.10665 14.7263C7.63149 14.1905 8.34331 13.8894 9.08553 13.8894C9.82775 13.8894 10.5396 14.1905 11.0644 14.7263L2.38879 23.5845C2.25878 23.7176 2.10425 23.8231 1.93412 23.8949C1.76399 23.9667 1.58162 24.0034 1.39753 24.0029ZM11.6029 13.277C11.4189 13.2775 11.2366 13.2406 11.0668 13.1685C10.8969 13.0964 10.7427 12.9905 10.6133 12.857L0.408512 2.43915C0.145688 2.17125 -0.00214239 1.80772 -0.0024573 1.42852C-0.0027722 1.04933 0.144454 0.685547 0.406833 0.417192C0.669212 0.148837 1.02525 -0.0021041 1.39663 -0.00242563C1.768 -0.00274716 2.12429 0.147577 2.38711 0.415478L12.5919 10.8344C12.8532 11.1035 12.9997 11.4671 12.9997 11.846C12.9997 12.2249 12.8532 12.5885 12.5919 12.8575C12.4625 12.9909 12.3084 13.0966 12.1386 13.1686C11.9688 13.2406 11.7867 13.2775 11.6029 13.277Z"
-                            fill="#6D5246"/>
-                    </g>
-                    <defs>
-                        <clipPath id="clip0_1_140">
-                            <rect width="13" height="24" fill="white"/>
-                        </clipPath>
-                    </defs>
-                </svg>
-            </a>
+            @if(!$date->subDay()->isPast())
+                <a href="?{{ http_build_query(array_merge(request()->query(),['date' => $date->subDay()->format('Y/m/d')])) }}"
+                   class="flex items-center justify-center w-[35px] h-[35px] rounded-full bg-white border border-[#707070]">
+                    <svg width="13" height="24" viewBox="0 0 13 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_1_140)">
+                            <path
+                                d="M1.39753 24.0029C1.12021 24.0034 0.848996 23.9197 0.618319 23.7626C0.387641 23.6054 0.207905 23.3818 0.101929 23.1201C-0.00404683 22.8584 -0.0314835 22.5705 0.0231024 22.2929C0.0776883 22.0153 0.211835 21.7605 0.408512 21.5609L7.10665 14.7263C7.63149 14.1905 8.34331 13.8894 9.08553 13.8894C9.82775 13.8894 10.5396 14.1905 11.0644 14.7263L2.38879 23.5845C2.25878 23.7176 2.10425 23.8231 1.93412 23.8949C1.76399 23.9667 1.58162 24.0034 1.39753 24.0029ZM11.6029 13.277C11.4189 13.2775 11.2366 13.2406 11.0668 13.1685C10.8969 13.0964 10.7427 12.9905 10.6133 12.857L0.408512 2.43915C0.145688 2.17125 -0.00214239 1.80772 -0.0024573 1.42852C-0.0027722 1.04933 0.144454 0.685547 0.406833 0.417192C0.669212 0.148837 1.02525 -0.0021041 1.39663 -0.00242563C1.768 -0.00274716 2.12429 0.147577 2.38711 0.415478L12.5919 10.8344C12.8532 11.1035 12.9997 11.4671 12.9997 11.846C12.9997 12.2249 12.8532 12.5885 12.5919 12.8575C12.4625 12.9909 12.3084 13.0966 12.1386 13.1686C11.9688 13.2406 11.7867 13.2775 11.6029 13.277Z"
+                                fill="#6D5246"/>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_1_140">
+                                <rect width="13" height="24" fill="white"/>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </a>
+            @else
+                <span
+                    class="flex items-center justify-center w-[35px] h-[35px] rounded-full bg-white opacity-50 border border-[#707070]">
+                    <svg width="13" height="24" viewBox="0 0 13 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_1_140)">
+                            <path
+                                d="M1.39753 24.0029C1.12021 24.0034 0.848996 23.9197 0.618319 23.7626C0.387641 23.6054 0.207905 23.3818 0.101929 23.1201C-0.00404683 22.8584 -0.0314835 22.5705 0.0231024 22.2929C0.0776883 22.0153 0.211835 21.7605 0.408512 21.5609L7.10665 14.7263C7.63149 14.1905 8.34331 13.8894 9.08553 13.8894C9.82775 13.8894 10.5396 14.1905 11.0644 14.7263L2.38879 23.5845C2.25878 23.7176 2.10425 23.8231 1.93412 23.8949C1.76399 23.9667 1.58162 24.0034 1.39753 24.0029ZM11.6029 13.277C11.4189 13.2775 11.2366 13.2406 11.0668 13.1685C10.8969 13.0964 10.7427 12.9905 10.6133 12.857L0.408512 2.43915C0.145688 2.17125 -0.00214239 1.80772 -0.0024573 1.42852C-0.0027722 1.04933 0.144454 0.685547 0.406833 0.417192C0.669212 0.148837 1.02525 -0.0021041 1.39663 -0.00242563C1.768 -0.00274716 2.12429 0.147577 2.38711 0.415478L12.5919 10.8344C12.8532 11.1035 12.9997 11.4671 12.9997 11.846C12.9997 12.2249 12.8532 12.5885 12.5919 12.8575C12.4625 12.9909 12.3084 13.0966 12.1386 13.1686C11.9688 13.2406 11.7867 13.2775 11.6029 13.277Z"
+                                fill="#6D5246"/>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_1_140">
+                                <rect width="13" height="24" fill="white"/>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </span>
+
+            @endif
 
             <!-- Date text -->
             <span class="text-[19px] font-bold text-[#6d5246]">{{ $date->format('Y/m/d') }}</span>
@@ -120,85 +139,8 @@
         </div>
 
         <!-- Bottom navigation bar -->
-        <div class="relative w-full h-[130px] mt-auto overflow-hidden">
-            <!-- Background bar -->
-            <div class="absolute left-0 top-[48px] w-full h-[82px] bg-[#FFFCFA] border-t border-[#E8DFD8]"></div>
+        @include('layout.user.bottom-navigation')
 
-            <!-- Center protruding button (absolute) -->
-            <div class="absolute left-1/2 top-[18px] -translate-x-1/2 w-[84px] h-[84px] rounded-full bg-black/10"></div>
-            <div
-                class="absolute left-1/2 top-[24px] -translate-x-1/2 w-[72px] h-[72px] rounded-full bg-[#503930]"></div>
-            <div
-                class="absolute left-1/2 top-[26px] -translate-x-1/2 w-[72px] h-[72px] rounded-full border border-[#D4AF7F]/45"></div>
-            <div class="absolute left-1/2 top-[47px] -translate-x-1/2 w-[4px] h-[30px] bg-white rounded-full"></div>
-            <div class="absolute left-1/2 top-[60px] -translate-x-1/2 w-[30px] h-[4px] bg-white rounded-full"></div>
-
-            <!-- Navigation items (flex row) -->
-            <div
-                class="absolute left-0 top-[48px] w-full h-[82px] flex flex-row items-start justify-around px-[20px] pt-[20px]">
-                <!-- Home -->
-                <div class="flex flex-col items-center gap-y-[6px]">
-                    <div class="relative w-[20px] h-[23px]">
-                        <svg width="20" height="23" viewBox="0 0 20 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 9L10 1L19 9V22H1V9Z" stroke="#6D5246" stroke-width="2" stroke-linejoin="round"/>
-                        </svg>
-                        <svg class="absolute left-1/2 -translate-x-1/2 bottom-[3px]" width="10" height="9"
-                             viewBox="0 0 10 9" fill="none">
-                            <path d="M1 9V1H9V9" stroke="#6D5246" stroke-width="2"/>
-                        </svg>
-                    </div>
-                    <span class="text-[11px] font-bold text-[#6d5246]">خانه</span>
-                </div>
-
-                <!-- Services -->
-                <div class="flex flex-col items-center gap-y-[6px]">
-                    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M11 1L14 8L21 11L14 14L11 21L8 14L1 11L8 8L11 1Z" stroke="#8D7366" stroke-width="2"
-                              stroke-linejoin="round"/>
-                    </svg>
-                    <span class="text-[11px] text-[#8d7366]">خدمات</span>
-                </div>
-
-                <!-- Center spacer for the protruding button -->
-                <div class="w-[50px]"></div>
-
-                <!-- Appointments -->
-                <div class="flex flex-col items-center gap-y-[6px]">
-                    <div class="relative w-[20px] h-[20px]">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M16 1H4C2.34315 1 1 2.34315 1 4V16C1 17.6569 2.34315 19 4 19H16C17.6569 19 19 17.6569 19 16V4C19 2.34315 17.6569 1 16 1Z"
-                                stroke="#8D7366" stroke-width="2"/>
-                        </svg>
-                        <div class="absolute left-[7px] top-[6px] w-[18px] h-[2px] bg-[#8D7366]"></div>
-                        <div class="absolute left-[12px] top-[0px] w-[2px] h-[6px] bg-[#8D7366]"></div>
-                        <div class="absolute left-[20px] top-[0px] w-[2px] h-[6px] bg-[#8D7366]"></div>
-                    </div>
-                    <span class="text-[11px] text-[#8d7366]">نوبت‌ها</span>
-                </div>
-
-                <!-- Profile -->
-                <div class="flex flex-col items-center gap-y-[6px]">
-                    <div class="relative w-[22px] h-[26px]">
-                        <svg class="absolute left-0 top-0" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                            <path
-                                d="M7 13C10.3137 13 13 10.3137 13 7C13 3.68629 10.3137 1 7 1C3.68629 1 1 3.68629 1 7C1 10.3137 3.68629 13 7 13Z"
-                                stroke="#8D7366" stroke-width="2"/>
-                        </svg>
-                        <svg class="absolute left-[-4px] bottom-0" width="22" height="12" viewBox="0 0 22 12"
-                             fill="none">
-                            <path d="M1 11C1 4 5 1 11 1C17 1 21 4 21 11" stroke="#8D7366" stroke-width="2"
-                                  stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <span class="text-[11px] text-[#8d7366]">پروفایل</span>
-                </div>
-            </div>
-
-            <!-- Center label (reserve) -->
-            <span
-                class="absolute left-1/2 top-[103px] -translate-x-1/2 text-[11px] font-bold text-[#6d5246]">رزرو</span>
-        </div>
         <div id="select-personnel-modal"
              class="w-[393px] h-[852px] bg-[#0005] z-10 absolute flex flex-col items-center overflow-hidden mx-auto hidden">
             <!-- Card -->

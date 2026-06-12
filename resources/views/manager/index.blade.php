@@ -99,6 +99,8 @@
         </div>
 
         <!-- Bottom Navigation -->
-        @include('layout.base.footer')
+        <div class="absolute left-0 bottom-0 w-full">
+            <x-layout.manager.bottom-navigation/>
+        </div>
     </div>
 @endsection

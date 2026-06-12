@@ -25,6 +25,6 @@ class Service extends Model
     #[Scope]
     protected function popular(Builder $query): void
     {
-        /* TODO: Fill this part */
+        $query->withCount('reservations')->orderBy('reservations_count', 'desc');
     }
 }

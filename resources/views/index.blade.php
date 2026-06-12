@@ -54,7 +54,8 @@
         <div class="flex flex-col shrink-0 mx-[24px] mt-[28px] gap-y-[13px]">
             <!-- Service Card 1: Eyebrows -->
             @foreach($popularServices as $service)
-                <div
+                <a
+                    href="{{ route('reservation.index',['service'=>$service]) }}"
                     class="relative w-full h-[88px] rounded-[28px] bg-[#FFFCFA] border border-[#ECE3DD] flex flex-row items-center justify-between px-[31px]">
                     <!-- Right side: text content -->
                     <div class="flex flex-col">
@@ -63,8 +64,8 @@
                         <p class="text-[12px] text-[#A09086] leading-tight mt-[1px]">{{ $service->description }}</p>
                     </div>
                     <!-- Left side: number -->
-                    <div class="text-[22px] font-bold text-[#3A2A24]">17</div>
-                </div>
+                    <div class="text-[22px] font-bold text-[#3A2A24]">{{ $service->reservations_count }}</div>
+                </a>
             @endforeach
         </div>
 

@@ -100,7 +100,9 @@
                 <path opacity="0.04" d="M40 0H220L120 210H0L40 0Z" fill="white"/>
             </svg>
         </div>
-        @include('layout.base.footer')
+        <div class="absolute left-0 bottom-0 w-full">
+            <x-layout.manager.bottom-navigation/>
+        </div>
         <x-bottom-drawer name="پرسنل"/>
     </div>
 @endsection

@@ -1,5 +1,5 @@
 <div
-    class="absolute left-0 bottom-0 w-full h-[72px] flex justify-around items-center border-t border-gray-300"
+    {{ $attributes->class(['w-full h-[72px] flex justify-around items-center border-t border-gray-300']) }}
 >
     <a href="{{ route('manager.index') }}"
         @class(['flex flex-col items-center text-xs font-bold','text-[#8d7366]'=>!request()->routeIs('manager.index'),'text-[#6d5246]' => request()->routeIs('manager.index')])>

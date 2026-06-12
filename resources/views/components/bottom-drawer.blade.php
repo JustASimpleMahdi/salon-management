@@ -1,7 +1,7 @@
 @props([
     'name'
 ])
-<div id="bottom-drawer" {{ $attributes->class(['hidden']) }}>
+<div id="bottom-drawer" {{ $attributes->class(['hidden fixed w-[393px] h-[100dvh]']) }}>
     <div data-background-el
          class="w-[393px] h-[875px] left-0 top-0 absolute bg-black/30 border border-[#707070]"></div>
     <div class="w-[393px] h-[220px] left-0 bottom-0 absolute">
@@ -49,7 +49,7 @@
     </div>
 
 </div>
-<div id="delete-confirm-modal" class="hidden w-[393px] h-[852px] left-0 top-0 absolute overflow-hidden">
+<div id="delete-confirm-modal" class="hidden w-[393px] h-[100dvh] fixed overflow-hidden">
     <div data-background-el class="w-[393px] h-[852px] left-0 top-0 absolute bg-black/30"></div>
     <div class="w-[345px] h-60 left-[24px] top-[280px] absolute bg-[#fffcfa] rounded-[34px]"></div>
     <div class="left-[150px] top-[317px] absolute text-center justify-start text-[#2d211d] text-2xl font-bold">

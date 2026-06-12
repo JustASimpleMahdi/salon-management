@@ -27,6 +27,11 @@ class Appointment extends Model
     }
 
     #[Scope]
+    protected function available(Builder $query): void
+    {
+        $query->where('end', '>=', Carbon::now());
+    }
+    #[Scope]
     protected function orderByTime(Builder $query): void
     {
         $query->orderBy('start', 'asc');

@@ -57,7 +57,9 @@
         </a>
 
         <!-- Bottom Navigation (مثل Home) -->
-        @include('layout.base.footer')
+        <div class="absolute left-0 bottom-0 w-full">
+            <x-layout.manager.bottom-navigation/>
+        </div>
         <x-bottom-drawer name="خدمت"/>
     </div>
 @endsection
