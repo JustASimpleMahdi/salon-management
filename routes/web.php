@@ -6,11 +6,14 @@ use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\UserAppointmentController;
 use App\Http\Controllers\UserDashboardController;
 use Illuminate\Support\Facades\Route;
 
 /* Authentication */
 Route::middleware(['auth'])->group(function () {
+    Route::get('/appointments', [UserAppointmentController::class, 'index'])->name('appointments.index');
+
     Route::post('/reservation/appointment/{appointment}/service/{service}/personnel/{personnel}', [ReservationController::class, 'confirm'])->name('reservation.confirm');
     Route::get('/reservation/appointment/{appointment}/service/{service}/personnel/{personnel}', [ReservationController::class, 'confirmation'])->name('reservation.confirmation');
     Route::get('/reservation', [ReservationController::class, 'index'])->name('reservation.index');

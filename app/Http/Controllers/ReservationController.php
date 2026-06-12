@@ -20,7 +20,7 @@ class ReservationController extends Controller
         $reservation->personnel()->associate($personnel);
         $reservation->save();
 
-        dd($reservation);
+        return response()->redirectToRoute('appointments.index');
     }
 
     public function confirmation(Appointment $appointment, Service $service, Personnel $personnel)

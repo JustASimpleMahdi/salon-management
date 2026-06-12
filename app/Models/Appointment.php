@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -44,6 +45,11 @@ class Appointment extends Model
     protected function today(Builder $query): void
     {
         $query->whereDate('start', now());
+    }
+
+    protected function date(): Attribute
+    {
+        return Attribute::get(fn() => $this->start->format('Y/m/d'));
     }
 
     protected function casts(): array
