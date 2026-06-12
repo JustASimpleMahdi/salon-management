@@ -14,7 +14,13 @@ class ReservationController extends Controller
 {
     public function confirm(Appointment $appointment, Service $service, Personnel $personnel)
     {
+        $reservation = auth()->user()->reservations()->make();
+        $reservation->appointment()->associate($appointment);
+        $reservation->service()->associate($service);
+        $reservation->personnel()->associate($personnel);
+        $reservation->save();
 
+        dd($reservation);
     }
 
     public function confirmation(Appointment $appointment, Service $service, Personnel $personnel)
