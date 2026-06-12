@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Route;
 
 /* Authentication */
 Route::middleware(['auth'])->group(function () {
-    Route::get('/reservation/service/{service}/personnel/{personnel}', [ReservationController::class, 'confirmation'])->name('reservation.confirmation');
+    Route::post('/reservation/appointment/{appointment}/service/{service}/personnel/{personnel}', [ReservationController::class, 'confirm'])->name('reservation.confirm');
+    Route::get('/reservation/appointment/{appointment}/service/{service}/personnel/{personnel}', [ReservationController::class, 'confirmation'])->name('reservation.confirmation');
     Route::get('/reservation', [ReservationController::class, 'index'])->name('reservation.index');
     Route::get('/services', [ReservationController::class, 'services'])->name('reservation.services');
 

@@ -12,10 +12,15 @@ use TypeError;
 
 class ReservationController extends Controller
 {
-    public function confirmation(Request $request, Service $service, Personnel $personnel)
+    public function confirm(Appointment $appointment, Service $service, Personnel $personnel)
     {
 
-//        return view('reservation.confirmation');
+    }
+
+    public function confirmation(Appointment $appointment, Service $service, Personnel $personnel)
+    {
+
+        return view('reservation.confirmation', compact('appointment', 'service', 'personnel'));
     }
 
     public function index(Request $request)

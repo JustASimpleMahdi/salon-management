@@ -72,34 +72,6 @@
 
         <!-- Time slot cards list -->
         <div class="flex flex-col gap-y-[24px] mt-[61px] px-[24px]">
-            <!-- Card 1 (reserved, gray background) -->
-            <div class="relative w-full h-[120px] bg-[#f3f3f3] rounded-[30px] overflow-hidden flex flex-col">
-                <div class="flex flex-col items-end pt-[14px] pr-[16px]">
-                    <span class="text-lg font-bold text-[#2d211d]">8:00 تا 9:30</span>
-                    <span class="text-xs text-[#b19a90] mt-[8px]">ابرو</span>
-                </div>
-                <div class="mt-auto mb-0">
-                    <div class="w-full h-px bg-[#F0E8E3]"></div>
-                    <div class="flex justify-end items-center pt-[4px] pr-[16px] pb-[4px]">
-                        <span class="text-[13px] font-bold text-[#8d7366]">الهام جهانی- سارا محمدی</span>
-                    </div>
-                </div>
-                <!-- Badge (absolute kept for floating) -->
-                <div class="absolute left-[18px] top-[69px]">
-                    <div class="relative w-[77px] h-[29px]">
-                        <svg width="77" height="29" viewBox="0 0 77 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M60.0975 0.402771H16.9024C7.82675 0.402771 0.469482 6.71431 0.469482 14.5C0.469482 22.2857 7.82675 28.5972 16.9024 28.5972H60.0975C69.1732 28.5972 76.5305 22.2857 76.5305 14.5C76.5305 6.71431 69.1732 0.402771 60.0975 0.402771Z"
-                                fill="#D9D4CF" stroke="#D4AF7F"/>
-                        </svg>
-                        <div
-                            class="absolute inset-0 flex items-center justify-center text-[12px] font-bold text-[#6d5246]">
-                            رزرو شده
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             @foreach($appointments as $appointment)
                 <!-- Card 2 (active/reserve) -->
                 <div class="relative w-full h-[120px] bg-white rounded-[30px] overflow-hidden flex flex-col">
@@ -133,7 +105,7 @@
                                         {
                                            fullname: '{{ $personnel->fullname }}',
                                            active: true,
-                                           confirmUrl: '{{ route('reservation.confirmation',['personnel' => $personnel,'service' => $service]) }}'
+                                           confirmUrl: '{{ route('reservation.confirmation',['appointment' => $appointment,'personnel' => $personnel,'service' => $service]) }}'
                                         },
                                         @endforeach
                                     ]
