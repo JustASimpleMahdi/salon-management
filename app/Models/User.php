@@ -42,7 +42,7 @@ class User extends Model implements
 
     public function redirectRoute(): string
     {
-        if ($this->is_manager) return route('manager.index');
-        return route('index');
+        if ($this->is_manager) return 'manager.index';
+        return 'index';
     }
 }

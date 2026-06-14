@@ -16,7 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'manager' => EnsureManagerMiddleware::class,
         ]);
-        $middleware->redirectUsersTo(fn(Request $request) => $request->user()->redirectRoute());
+        $middleware->redirectUsersTo(fn(Request $request) => route($request->user()->redirectRoute()));
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

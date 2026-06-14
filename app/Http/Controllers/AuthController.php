@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
+    public function profile()
+    {
+        return view('auth.profile');
+    }
     public function signin()
     {
         return view('auth.signin');
@@ -50,9 +54,14 @@ class AuthController extends Controller
 
         return redirect()->route(auth()->user()->redirectRoute());
     }
-    public function logout()
+
+    public function logout(Request $request)
     {
         Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
         return redirect()->route('index');
     }
 }

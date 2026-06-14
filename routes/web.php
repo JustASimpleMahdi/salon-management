@@ -10,8 +10,8 @@ use App\Http\Controllers\UserAppointmentController;
 use App\Http\Controllers\UserDashboardController;
 use Illuminate\Support\Facades\Route;
 
-/* Authentication */
 Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [AuthController::class, 'profile'])->name('profile.index');
     Route::get('/appointments', [UserAppointmentController::class, 'index'])->name('appointments.index');
 
     Route::post('/reservation/appointment/{appointment}/service/{service}/personnel/{personnel}', [ReservationController::class, 'confirm'])->name('reservation.confirm');
@@ -28,6 +28,7 @@ Route::prefix('manager')->middleware(['auth', 'manager'])->group(function () {
     Route::resource('services', ServiceController::class)->except(['show'])->names('manager.services');
     Route::get('/', [ManagerController::class, 'index'])->name('manager.index');
 });
+
 
 Route::middleware('guest')->group(function () {
     Route::get('/signin', [AuthController::class, 'signin'])->name('signin');
