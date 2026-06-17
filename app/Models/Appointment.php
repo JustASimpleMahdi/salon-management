@@ -26,11 +26,25 @@ class Appointment extends Model
         return $this->belongsToMany(Personnel::class);
     }
 
-    #[Scope]
-    protected function available(Builder $query): void
+    public function personnelsWithReserved(): BelongsToMany
     {
-        $query->where('end', '>=', Carbon::now());
+        return $this->belongsToMany(Personnel::class)
+            ->select('personnels.*')
+            ->selectRaw(
+                'EXISTS (
+                SELECT 1 FROM reservations
+                WHERE reservations.personnel_id = personnels.id
+                  AND reservations.appointment_id = appointment_personnel.appointment_id
+            ) as reserved'
+            );
     }
+
+    #[Scope]
+    protected function future(Builder $query): void
+    {
+        $query->where('start', '>', Carbon::now());
+    }
+
     #[Scope]
     protected function orderByTime(Builder $query): void
     {

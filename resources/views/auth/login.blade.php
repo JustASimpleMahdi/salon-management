@@ -94,7 +94,7 @@
             @enderror
 
             <div class="mt-4 text-center text-[#8A817C] text-[12px] cursor-pointer">
-                رمز عبور خود را فراموش کرده‌اید؟ <a href="{{ route('signin') }}" class="font-bold underline">ثبت نام</a>
+                حساب کاربری ندارید؟ <a href="{{ route('signin') }}" class="font-bold underline">ثبت نام</a>
             </div>
         </div>
 

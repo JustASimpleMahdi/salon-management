@@ -120,10 +120,10 @@
                                 type="button"
                                 onclick="openSelectPersonnelModal({
                                     personnels : [
-                                        @foreach($appointment->personnels as $personnel)
+                                        @foreach($appointment->personnelsWithReserved as $personnel)
                                         {
                                            fullname: '{{ $personnel->fullname }}',
-                                           active: true,
+                                           active: {{ !$personnel->reserved ? 'true' : 'false' }},
                                            confirmUrl: '{{ route('reservation.confirmation',['appointment' => $appointment,'personnel' => $personnel,'service' => $service]) }}'
                                         },
                                         @endforeach
@@ -183,15 +183,29 @@
             const defaultSelectedPersonnelIndex = 0
             selectPersonnelModalConfirmButtonEl.href = personnels[defaultSelectedPersonnelIndex].confirmUrl
             personnels.forEach(({fullname, active, confirmUrl}, index) => {
-                selectPersonnelModalPersonnelsEl.innerHTML += `
-                    <div
-                        class="cursor-pointer w-[273px] h-[47px] bg-white has-checked:bg-[#FFF1EB] border border-[#ECE3DD] rounded-full flex items-center pr-[24px]"
-                        onclick="this.querySelector('input').click()"
-                    >
-                        <input name="personnel" type="radio" class="hidden" value="${confirmUrl}" ${index === defaultSelectedPersonnelIndex ? 'checked' : ''}>
-                        <span class="text-[13px] font-bold text-[#2d211d]">${fullname}</span>
-                    </div>
-                `
+                if (active) {
+                    selectPersonnelModalPersonnelsEl.innerHTML += `
+                        <div
+                            class="cursor-pointer w-[273px] h-[47px] bg-white has-checked:bg-[#FFF1EB] border border-[#ECE3DD] rounded-full flex items-center pr-[24px]"
+                            onclick="this.querySelector('input').click()"
+                        >
+                            <input name="personnel" type="radio" class="hidden" value="${confirmUrl}" ${index === defaultSelectedPersonnelIndex ? 'checked' : ''}>
+                            <span class="text-[13px] font-bold text-[#2d211d]">${fullname}</span>
+                        </div>
+                    `
+                } else {
+                    selectPersonnelModalPersonnelsEl.innerHTML += `
+                        <div
+                            class="flex justify-between opacity-50 cursor-pointer w-[273px] h-[47px] bg-white has-checked:bg-[#FFF1EB] border border-[#ECE3DD] rounded-full flex items-center pr-[24px]"
+
+                        >
+                            <span class="text-[13px] font-bold text-[#2d211d]">${fullname}</span>
+<span>رزرو شده</span>
+                        </div>
+                    `
+                }
+
+
             })
             selectPersonnelModalPersonnelsEl.querySelectorAll('input[type="radio"]').forEach(input => {
                 input.addEventListener('change', () => {

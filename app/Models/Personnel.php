@@ -28,4 +28,11 @@ class Personnel extends Model
     {
         return Attribute::get(fn() => $this->firstname . ' ' . $this->lastname);
     }
+
+    protected function casts(): array
+    {
+        return [
+            'reserved' => 'boolean'
+        ];
+    }
 }

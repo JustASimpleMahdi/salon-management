@@ -42,7 +42,7 @@ class ReservationController extends Controller
             $date = Jalalian::now();
         }
 
-        $appointments = Appointment::with(['personnels', 'personnels.services'])->byDate($date)->available()->orderByTime()->get();
+        $appointments = Appointment::with(['personnelsWithReserved', 'personnelsWithReserved.services'])->byDate($date)->future()->orderByTime()->get();
 
         return view('reservation.index', compact('date', 'appointments', 'service'));
     }
