@@ -4,6 +4,14 @@
           class="w-[393px] h-[852px] relative bg-[#f8f4f1] overflow-hidden">
         @csrf
         @method('PUT')
+        <a href="{{ route('manager.appointments.index') }}" data-svg-wrapper="" class="left-[40px] top-[45px] absolute">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="24" r="24" fill="#FFFCFA"></circle>
+                <circle cx="24" cy="24" r="23" stroke="#E7DED8"></circle>
+                <path d="M27 16L19 24L27 32" stroke="#6D5246" stroke-width="2.5" stroke-linecap="round"
+                      stroke-linejoin="round"></path>
+            </svg>
+        </a>
         <div
             class="left-[191px] top-[108px] absolute text-right justify-start text-[#6d5246] text-sm font-normal">
             :تاریخ
@@ -13,8 +21,9 @@
             disabled
             class="w-30 left-[140px] top-[142px] absolute text-center justify-start text-[#6d5246] text-[19px] font-bold">
 
-        <div class="left-[255px] top-[42px] absolute justify-start text-[#2d211d] text-[28px] font-bold">
-            ثبت نوبت
+        <div
+            class="left-[225px] top-[42px] whitespace-nowrap absolute justify-start text-[#2d211d] text-[28px] font-bold">
+            ویرایش نوبت
         </div>
         <div class="w-[138px] h-[84px] left-[219px] top-[190px] absolute overflow-hidden">
             <div
